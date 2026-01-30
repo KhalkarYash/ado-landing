@@ -1,0 +1,202 @@
+'use client'
+
+import { useEffect, useRef } from 'react'
+import gsap from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { motion } from 'framer-motion'
+import { Navigation } from '@/components/Navigation'
+import { Footer } from '@/components/Footer'
+import { Hero } from '@/components/Hero'
+
+gsap.registerPlugin(ScrollTrigger)
+
+export default function About() {
+  const cardsRef = useRef<HTMLDivElement[]>([])
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      cardsRef.current.forEach((card, idx) => {
+        if (!card) return
+        gsap.from(card, {
+          scrollTrigger: {
+            trigger: card,
+            start: 'top 80%',
+            toggleActions: 'play none none reverse'
+          },
+          opacity: 0,
+          y: 50,
+          duration: 0.8,
+          delay: idx * 0.1
+        })
+      })
+    })
+
+    return () => ctx.revert()
+  }, [])
+
+  const values = [
+    { icon: '🔒', title: 'Privacy First', description: 'Your code stays on your machine. We believe developers should have complete control over their intellectual property.' },
+    { icon: '⚡', title: 'Speed Matters', description: 'Every millisecond counts. We optimize relentlessly to ensure AutoDevOS never slows you down.' },
+    { icon: '🎯', title: 'Developer Focused', description: 'Built by developers, for developers. We understand your pain points and build solutions that matter.' },
+  ]
+
+  const teamMembers = [
+    { name: 'Alex Chen', role: 'Founder & CEO', emoji: 'AC' },
+    { name: 'Sarah Williams', role: 'CTO', emoji: 'SW' },
+    { name: 'Mike Johnson', role: 'Head of Product', emoji: 'MJ' },
+  ]
+
+  const stats = [
+    { number: '10K+', label: 'Developers' },
+    { number: '50+', label: 'Languages Supported' },
+    { number: '1M+', label: 'Code Files Analyzed' },
+  ]
+
+  return (
+    <div className="w-full">
+      <Navigation />
+      
+      <Hero
+        title="Building the Future of Development"
+        subtitle="We're on a mission to empower developers with AI that amplifies their capabilities without replacing their creativity"
+      />
+
+      {/* Story Section */}
+      <section className="py-16 md:py-24 px-6 md:px-8">
+        <div className="max-w-6xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center mb-16">
+            <motion.div initial={{ opacity: 0, x: -50 }} whileInView={{ opacity: 1, x: 0 }} transition={{ duration: 0.6 }}>
+              <h2 className="text-3xl md:text-4xl font-black mb-6 text-[hsl(160,84%,39%)]" style={{ fontFamily: 'Orbitron' }}>
+                Our Story
+              </h2>
+              <p className="text-[hsl(180,20%,60%)] mb-4 leading-relaxed">
+                AutoDevOS was born from frustration. As developers ourselves, we were tired of context switching between our terminal, IDE, browser tabs, and various AI tools. We spent more time managing our tools than actually coding.
+              </p>
+              <p className="text-[hsl(180,20%,60%)] mb-4 leading-relaxed">
+                We believed there had to be a better way. A way to bring AI assistance directly into the terminal where developers feel most at home. A way that respects privacy, maintains control, and actually understands what you're trying to build.
+              </p>
+              <p className="text-[hsl(180,20%,60%)] leading-relaxed">
+                After months of research and development, AutoDevOS CLI emerged as the solution we wished existed all along.
+              </p>
+            </motion.div>
+
+            <motion.div 
+              initial={{ opacity: 0, x: 50 }} 
+              whileInView={{ opacity: 1, x: 0 }} 
+              transition={{ duration: 0.6 }}
+              className="p-8 rounded-2xl border border-white/10 bg-white/[0.02] backdrop-blur h-64 flex items-center justify-center text-6xl"
+            >
+              💻
+            </motion.div>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+            <motion.div 
+              initial={{ opacity: 0, x: -50 }} 
+              whileInView={{ opacity: 1, x: 0 }} 
+              transition={{ duration: 0.6 }}
+              className="p-8 rounded-2xl border border-white/10 bg-white/[0.02] backdrop-blur h-64 flex items-center justify-center text-6xl order-2 md:order-1"
+            >
+              🚀
+            </motion.div>
+
+            <motion.div initial={{ opacity: 0, x: 50 }} whileInView={{ opacity: 1, x: 0 }} transition={{ duration: 0.6 }} className="order-1 md:order-2">
+              <h2 className="text-3xl md:text-4xl font-black mb-6 text-[hsl(160,84%,39%)]" style={{ fontFamily: 'Orbitron' }}>
+                Our Mission
+              </h2>
+              <p className="text-[hsl(180,20%,60%)] mb-4 leading-relaxed">
+                We're building the world's most intelligent terminal-native development environment. Our goal is to eliminate the friction between thought and code, making development more intuitive and enjoyable.
+              </p>
+              <p className="text-[hsl(180,20%,60%)] mb-4 leading-relaxed">
+                We believe AI should augment human creativity, not replace it. AutoDevOS is designed to handle the repetitive and tedious tasks, freeing developers to focus on solving complex problems and building innovative solutions.
+              </p>
+              <p className="text-[hsl(180,20%,60%)] leading-relaxed">
+                Privacy and security are at the core of everything we do. Your code is your intellectual property, and we've built AutoDevOS to respect that from the ground up.
+              </p>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* Values Section */}
+      <section className="py-16 md:py-24 px-6 md:px-8 bg-white/[0.02]">
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-black mb-4 bg-gradient-to-r from-[hsl(180,100%,95%)] to-[hsl(180,100%,50%)] bg-clip-text text-transparent" style={{ fontFamily: 'Orbitron' }}>
+              Our Values
+            </h2>
+            <p className="text-lg text-[hsl(180,20%,60%)] max-w-2xl mx-auto">
+              The principles that guide everything we build
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {values.map((value, idx) => (
+              <motion.div
+                key={idx}
+                ref={el => { if (el) cardsRef.current[idx] = el }}
+                className="p-8 rounded-2xl border border-white/10 bg-white/[0.02] backdrop-blur hover:border-[hsl(160,84%,39%)]/30 hover:bg-white/[0.04] transition-all text-center"
+              >
+                <div className="text-5xl mb-4">{value.icon}</div>
+                <h3 className="text-xl font-bold text-white mb-3">{value.title}</h3>
+                <p className="text-[hsl(180,20%,60%)] leading-relaxed">{value.description}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Team Section */}
+      <section className="py-16 md:py-24 px-6 md:px-8">
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-black mb-4 bg-gradient-to-r from-[hsl(180,100%,95%)] to-[hsl(180,100%,50%)] bg-clip-text text-transparent" style={{ fontFamily: 'Orbitron' }}>
+              Our Team
+            </h2>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {teamMembers.map((member, idx) => (
+              <motion.div
+                key={idx}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ delay: idx * 0.2 }}
+                className="p-8 rounded-2xl border border-white/10 bg-white/[0.02] backdrop-blur hover:border-[hsl(160,84%,39%)]/30 transition-all text-center"
+              >
+                <div className="w-24 h-24 rounded-full bg-gradient-to-br from-[hsl(160,84%,39%)] to-[hsl(180,100%,50%)] flex items-center justify-center text-white font-bold text-xl mx-auto mb-4">
+                  {member.emoji}
+                </div>
+                <h3 className="text-xl font-bold text-white mb-1">{member.name}</h3>
+                <p className="text-[hsl(180,100%,50%)]">{member.role}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Stats Section */}
+      <section className="py-16 md:py-24 px-6 md:px-8 bg-white/[0.02]">
+        <div className="max-w-6xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+            {stats.map((stat, idx) => (
+              <motion.div
+                key={idx}
+                initial={{ opacity: 0, scale: 0.5 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                transition={{ delay: idx * 0.2 }}
+              >
+                <div className="text-5xl md:text-6xl font-black mb-2 bg-gradient-to-r from-[hsl(160,84%,39%)] to-[hsl(180,100%,50%)] bg-clip-text text-transparent" style={{ fontFamily: 'Orbitron' }}>
+                  {stat.number}
+                </div>
+                <p className="text-lg text-[hsl(180,20%,60%)]">{stat.label}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <Footer />
+    </div>
+  )
+}
