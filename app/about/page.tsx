@@ -7,7 +7,6 @@ import { motion } from "framer-motion";
 import { Navigation } from "@/components/Navigation";
 import { Footer } from "@/components/Footer";
 import { Hero } from "@/components/Hero";
-import { PinContainer } from "@/components/ui/3d-pin";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -75,15 +74,56 @@ export default function About() {
       name: "Soham Gaikwad",
       role: "",
       emoji: "SG",
+      image: "/images/soham.jpg",
       links: [
         {
           label: "GitHub",
-          href: "https://github.com/sohamgaikwad",
+          href: "https://github.com/sohamgaikwad1502",
           icon: "GH",
+        },
+        {
+          label: "LinkedIn",
+          href: "https://in.linkedin.com/in/sohamgaikwad152004",
+          icon: "LI",
         },
       ],
     },
-    // { name: "Mike Johnson", role: "Head of Product", emoji: "MJ", links: [] },
+    // {
+    //   name: "Vivek Sanandiya",
+    //   role: "",
+    //   emoji: "VS",
+    //   image: "/images/vivek.jpg",
+    //   links: [
+    //     {
+    //       label: "GitHub",
+    //       href: "https://github.com/viveksanandiya",
+    //       icon: "GH",
+    //     },
+    //     {
+    //       label: "LinkedIn",
+    //       href: "https://in.linkedin.com/in/vivek-sanandiya787",
+    //       icon: "LI",
+    //     },
+    //   ],
+    // },
+    // {
+    //   name: "Kanhaiya Sharma",
+    //   role: "",
+    //   emoji: "KS",
+    //   image: "/images/kanhaiya.jpeg",
+    //   links: [
+    //     {
+    //       label: "GitHub",
+    //       href: "https://github.com/kanhaiya1202",
+    //       icon: "GH",
+    //     },
+    //     {
+    //       label: "LinkedIn",
+    //       href: "https://in.linkedin.com/in/kanhaiyasharma12",
+    //       icon: "LI",
+    //     },
+    //   ],
+    // },
   ];
 
   const stats = [
@@ -243,27 +283,22 @@ export default function About() {
                 transition={{ delay: idx * 0.2 }}
                 className="flex flex-col items-center text-center z-40"
               >
-                <PinContainer
-                  title={member.name}
-                  href={member.links?.[0]?.href}
-                >
-                  <div className="w-48 h-48 sm:w-64 sm:h-64 flex items-center justify-center">
-                    {member.image ? (
-                      <img
-                        src={member.image}
-                        alt={member.name}
-                        className="w-full h-full object-cover rounded-full"
-                      />
-                    ) : (
-                      <div className="w-full h-full rounded-full bg-gradient-to-br from-[hsl(160,84%,39%)] to-[hsl(180,100%,50%)] flex items-center justify-center text-white font-bold text-4xl">
-                        {member.name
-                          .split(" ")
-                          .map((n) => n[0])
-                          .join("")}
-                      </div>
-                    )}
-                  </div>
-                </PinContainer>
+                <div className="w-36 h-36 sm:w-44 sm:h-44 rounded-full overflow-hidden border-2 border-[hsl(160,84%,39%)]/40 ring-4 ring-white/5">
+                  {member.image ? (
+                    <img
+                      src={member.image}
+                      alt={member.name}
+                      className="w-full h-full object-cover"
+                    />
+                  ) : (
+                    <div className="w-full h-full bg-linear-to-br from-[hsl(160,84%,39%)] to-[hsl(180,100%,50%)] flex items-center justify-center text-white font-bold text-3xl">
+                      {member.name
+                        .split(" ")
+                        .map((n) => n[0])
+                        .join("")}
+                    </div>
+                  )}
+                </div>
 
                 <h3 className="text-xl font-bold text-white mt-4">
                   {member.name}
@@ -291,7 +326,7 @@ export default function About() {
       </section>
 
       {/* Stats Section */}
-      <section className="py-16 md:py-24 px-6 md:px-8 bg-white/[0.02]">
+      <section className="py-16 md:py-24 px-6 md:px-8 bg-white/2">
         <div className="max-w-6xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
             {stats.map((stat, idx) => (
@@ -302,7 +337,7 @@ export default function About() {
                 transition={{ delay: idx * 0.2 }}
               >
                 <div
-                  className="text-5xl md:text-6xl font-black mb-2 bg-gradient-to-r from-[hsl(160,84%,39%)] to-[hsl(180,100%,50%)] bg-clip-text text-transparent"
+                  className="text-5xl md:text-6xl font-black mb-2 bg-linear-to-r from-[hsl(160,84%,39%)] to-[hsl(180,100%,50%)] bg-clip-text text-transparent"
                   style={{ fontFamily: "Orbitron" }}
                 >
                   {stat.number}
