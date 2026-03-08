@@ -7,6 +7,7 @@ import { motion } from "framer-motion";
 import { Navigation } from "@/components/Navigation";
 import { Footer } from "@/components/Footer";
 import { Hero } from "@/components/Hero";
+import { PinContainer } from "@/components/ui/3d-pin";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -60,20 +61,36 @@ export default function About() {
       name: "Yash Khalkar",
       role: "",
       emoji: "YK",
+      image: "/images/yash.jpg",
+      links: [
+        { label: "GitHub", href: "https://github.com/khalkaryash", icon: "GH" },
+        {
+          label: "LinkedIn",
+          href: "https://linkedin.com/in/yashkhalkar",
+          icon: "LI",
+        },
+      ],
     },
     {
       name: "Soham Gaikwad",
       role: "",
       emoji: "SG",
+      links: [
+        {
+          label: "GitHub",
+          href: "https://github.com/sohamgaikwad",
+          icon: "GH",
+        },
+      ],
     },
-    // { name: "Mike Johnson", role: "Head of Product", emoji: "MJ" },
+    // { name: "Mike Johnson", role: "Head of Product", emoji: "MJ", links: [] },
   ];
 
-  // const stats = [
-  //   { number: "10K+", label: "Developers" },
-  //   { number: "50+", label: "Languages Supported" },
-  //   { number: "1M+", label: "Code Files Analyzed" },
-  // ];
+  const stats = [
+    { number: "100%", label: "Local & Private" },
+    { number: "Open", label: "Source" },
+    { number: "0", label: "Data Sent to Cloud" },
+  ];
 
   return (
     <div className="w-full">
@@ -121,7 +138,7 @@ export default function About() {
               initial={{ opacity: 0, x: 50 }}
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6 }}
-              className="p-8 rounded-2xl border border-white/10 bg-white/[0.02] backdrop-blur h-64 flex items-center justify-center text-6xl"
+              className="p-8 rounded-2xl border border-white/10 bg-white/2 backdrop-blur h-64 flex items-center justify-center text-6xl"
             >
               💻
             </motion.div>
@@ -132,7 +149,7 @@ export default function About() {
               initial={{ opacity: 0, x: -50 }}
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6 }}
-              className="p-8 rounded-2xl border border-white/10 bg-white/[0.02] backdrop-blur h-64 flex items-center justify-center text-6xl order-2 md:order-1"
+              className="p-8 rounded-2xl border border-white/10 bg-white/2 backdrop-blur h-64 flex items-center justify-center text-6xl order-2 md:order-1"
             >
               🚀
             </motion.div>
@@ -172,11 +189,11 @@ export default function About() {
       </section>
 
       {/* Values Section */}
-      <section className="py-16 md:py-24 px-6 md:px-8 bg-white/[0.02]">
+      <section className="py-16 md:py-24 px-6 md:px-8 bg-white/2">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
             <h2
-              className="text-4xl md:text-5xl font-black mb-4 bg-gradient-to-r from-[hsl(180,100%,95%)] to-[hsl(180,100%,50%)] bg-clip-text text-transparent"
+              className="text-4xl md:text-5xl font-black mb-4 bg-linear-to-r from-[hsl(180,100%,95%)] to-[hsl(180,100%,50%)] bg-clip-text text-transparent"
               style={{ fontFamily: "Orbitron" }}
             >
               Our Values
@@ -193,7 +210,7 @@ export default function About() {
                 ref={(el) => {
                   if (el) cardsRef.current[idx] = el;
                 }}
-                className="p-8 rounded-2xl border border-white/10 bg-white/[0.02] backdrop-blur hover:border-[hsl(160,84%,39%)]/30 hover:bg-white/[0.04] transition-all text-center"
+                className="p-8 rounded-2xl border border-white/10 bg-white/2 backdrop-blur hover:border-[hsl(160,84%,39%)]/30 hover:bg-white/4 transition-all text-center"
               >
                 <div className="text-5xl mb-4">{value.icon}</div>
                 <h3 className="text-xl font-bold text-white mb-3">
@@ -212,30 +229,61 @@ export default function About() {
       <section className="py-16 md:py-24 px-6 md:px-8">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
-            <h2
-              className="text-4xl md:text-5xl font-black mb-4 bg-gradient-to-r from-[hsl(180,100%,95%)] to-[hsl(180,100%,50%)] bg-clip-text text-transparent"
-              style={{ fontFamily: "Orbitron" }}
-            >
+            <h2 className="text-4xl md:text-5xl font-black mb-4 ...">
               Our Team
             </h2>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="flex flex-wrap justify-center gap-8 sm:gap-12">
             {teamMembers.map((member, idx) => (
               <motion.div
                 key={idx}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ delay: idx * 0.2 }}
-                className="p-8 rounded-2xl border border-white/10 bg-white/[0.02] backdrop-blur hover:border-[hsl(160,84%,39%)]/30 transition-all text-center"
+                className="flex flex-col items-center text-center z-40"
               >
-                <div className="w-24 h-24 rounded-full bg-gradient-to-br from-[hsl(160,84%,39%)] to-[hsl(180,100%,50%)] flex items-center justify-center text-white font-bold text-xl mx-auto mb-4">
-                  {member.emoji}
-                </div>
-                <h3 className="text-xl font-bold text-white mb-1">
+                <PinContainer
+                  title={member.name}
+                  href={member.links?.[0]?.href}
+                >
+                  <div className="w-48 h-48 sm:w-64 sm:h-64 flex items-center justify-center">
+                    {member.image ? (
+                      <img
+                        src={member.image}
+                        alt={member.name}
+                        className="w-full h-full object-cover rounded-full"
+                      />
+                    ) : (
+                      <div className="w-full h-full rounded-full bg-gradient-to-br from-[hsl(160,84%,39%)] to-[hsl(180,100%,50%)] flex items-center justify-center text-white font-bold text-4xl">
+                        {member.name
+                          .split(" ")
+                          .map((n) => n[0])
+                          .join("")}
+                      </div>
+                    )}
+                  </div>
+                </PinContainer>
+
+                <h3 className="text-xl font-bold text-white mt-4">
                   {member.name}
                 </h3>
-                <p className="text-[hsl(180,100%,50%)]">{member?.role}</p>
+                <p className="text-[hsl(180,100%,50%)]">{member.role}</p>
+                {member.links && member.links.length > 0 && (
+                  <div className="flex gap-3 mt-3 justify-center">
+                    {member.links.map((link) => (
+                      <a
+                        key={link.label}
+                        href={link.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="px-3 py-1 text-xs rounded-full border border-white/20 text-[hsl(180,20%,60%)] hover:border-[hsl(160,84%,39%)] hover:text-[hsl(160,84%,39%)] transition-colors"
+                      >
+                        {link.label}
+                      </a>
+                    ))}
+                  </div>
+                )}
               </motion.div>
             ))}
           </div>
@@ -243,7 +291,7 @@ export default function About() {
       </section>
 
       {/* Stats Section */}
-      {/* <section className="py-16 md:py-24 px-6 md:px-8 bg-white/2">
+      <section className="py-16 md:py-24 px-6 md:px-8 bg-white/[0.02]">
         <div className="max-w-6xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
             {stats.map((stat, idx) => (
@@ -264,7 +312,7 @@ export default function About() {
             ))}
           </div>
         </div>
-      </section> */}
+      </section>
 
       <Footer />
     </div>
